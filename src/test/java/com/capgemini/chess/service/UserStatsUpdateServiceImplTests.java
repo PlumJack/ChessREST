@@ -30,6 +30,7 @@ public class UserStatsUpdateServiceImplTests {
 	
 	private UserStatsUpdateService userStatsUpdateService;
 	
+	@SuppressWarnings("unchecked")
 	@Before
 	    public void setUp() throws UserProfileValidationException {
 			userStatsUpdateService = new UserStatsUpdateServiceImpl(userStatsReaderService,

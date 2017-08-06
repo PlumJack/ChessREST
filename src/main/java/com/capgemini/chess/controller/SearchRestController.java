@@ -13,7 +13,7 @@ import com.capgemini.chess.service.to.UserProfileTO;
 
 @RestController
 @RequestMapping("/search")
-public class SearchController {
+public class SearchRestController {
 
 	@Autowired
 	UserProfileSearchService userProfileSearchService;

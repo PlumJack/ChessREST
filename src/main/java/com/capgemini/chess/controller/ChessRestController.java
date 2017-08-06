@@ -1,9 +1,6 @@
 package com.capgemini.chess.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -66,19 +63,6 @@ public class ChessRestController {
 		 match.setGameResult(GameResult.HOST_WON);
 		 return match;
 	 }
-	 
-	 private UserStatsTO createUserStats(int i){
-			UserStatsTO userStatsTO = new UserStatsTO();
-			userStatsTO.setLevel(0);
-			userStatsTO.setPosition(i);
-			userStatsTO.setPoints(i*10-20);
-			userStatsTO.setGamesPlayed(i+3);
-			userStatsTO.setGamesWon(i);
-			userStatsTO.setGamesDrawn(1);
-			userStatsTO.setGamesLost(2);
-			
-			return userStatsTO;
-		}
 	 
 	 private UserUpdateTO createUserUpdateTO(int i, int iLogin, int iOldPassword){
 			UserUpdateTO userUpdateTO = new UserUpdateTO();

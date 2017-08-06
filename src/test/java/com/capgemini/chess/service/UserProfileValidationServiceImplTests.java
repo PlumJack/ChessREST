@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.capgemini.chess.dataaccess.UserDao;
@@ -77,7 +78,7 @@ public class UserProfileValidationServiceImplTests {
 		userProfileValidationService.validateId(id);
 		
 		//then	
-		
+		Mockito.verify(userDao, Mockito.times(1)).findById(2L);
 	}
 	
 	@Test
@@ -91,7 +92,7 @@ public class UserProfileValidationServiceImplTests {
 		userProfileValidationService.validateLogin(login);
 		
 		//then
-		
+		Mockito.verify(userDao, Mockito.times(2)).findByLogin("login2");
 	}
 
 	@Test
@@ -104,6 +105,7 @@ public class UserProfileValidationServiceImplTests {
 		userProfileValidationService.validateId(id);
 				
 		//then		
+		Mockito.verify(userDao, Mockito.times(1)).findById(2L);
 		
 	}
 
@@ -117,7 +119,7 @@ public class UserProfileValidationServiceImplTests {
 		userProfileValidationService.validateLogin(login);
 				
 		//then
-					
+		Mockito.verify(userDao, Mockito.times(1)).findByLogin("login2");			
 	}	
 
 }

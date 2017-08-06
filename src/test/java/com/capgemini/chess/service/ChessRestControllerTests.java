@@ -1,7 +1,5 @@
 package com.capgemini.chess.service;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.capgemini.chess.controller.ChessRestController;
-import com.capgemini.chess.exception.UserProfileValidationException;
-import com.capgemini.chess.service.to.UserProfileTO;
 import com.capgemini.chess.service.to.UserStatsTO;
-import com.capgemini.chess.service.to.UserUpdateTO;
-
-import junit.framework.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChessRestControllerTests {
@@ -40,7 +33,6 @@ public class ChessRestControllerTests {
 		mockMvc = MockMvcBuilders.standaloneSetup(chessRestController).build();
 	}
 	
-	//throws Exception 
 	@Test
 	public void shouldGetUserStatsByLogin() throws Exception {
 		//given
@@ -83,36 +75,6 @@ public class ChessRestControllerTests {
 		response.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
-	
-	private UserUpdateTO createUserUpdateTO(int i, int iLogin, int iOldPassword){
-		UserUpdateTO userUpdateTO = new UserUpdateTO();
-		
-		userUpdateTO.setLogin("login" + iLogin);
-		userUpdateTO.setOldPassword("password" + iOldPassword);
-		userUpdateTO.setNewPassword("password" + i);
-		userUpdateTO.setName("name" + i);
-		userUpdateTO.setSurname("surname" + i);
-		userUpdateTO.setEmail("email" + i + "@email.pl");
-		userUpdateTO.setAboutMe("aboutMe" + i);
-		userUpdateTO.setLifeMotto("lifeMotto" + i);
-		
-		return userUpdateTO;
-	}
-	
-	private UserProfileTO createUserProfile(int i){
-		UserProfileTO userProfileTO = new UserProfileTO();
-		userProfileTO.setLogin("login" + i);
-		userProfileTO.setPassword("password" + i);
-		userProfileTO.setName("name" + i);
-		userProfileTO.setSurname("surname" + i);
-		userProfileTO.setEmail("email" + i + "@email.pl");
-		userProfileTO.setAboutMe("aboutMe" + i);
-		userProfileTO.setLifeMotto("lifeMotto" + i);
-		
-		userProfileTO.setUserStatsTO(createUserStats(i));
-		
-		return userProfileTO;
-	}
 	
 	private UserStatsTO createUserStats(int i){
 		UserStatsTO userStatsTO = new UserStatsTO();
