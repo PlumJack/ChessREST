@@ -3,6 +3,7 @@ package com.capgemini.chess.dataaccess.dao.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,10 @@ import com.capgemini.chess.service.to.UserUpdateTO;
 public class UserDaoImpl implements UserDao {
 
 	private final Map<Long, UserProfileEntity> users = new HashMap<>();
+	
+	public UserDaoImpl() {
+		initData();
+	}
 
 	@Override
 	public UserProfileTO save(UserProfileTO to) throws UserProfileExistsInDatabaseException {
@@ -98,10 +103,68 @@ public class UserDaoImpl implements UserDao {
 		Collections.sort(usersList, (UserProfileEntity u1, UserProfileEntity u2) -> 
 		Integer.compare(u1.getUserStatsEntity().getPoints(), u2.getUserStatsEntity().getPoints()));	
 		
-		for(int i=0; i<users.size(); i++){
-			users.get(0).getUserStatsEntity().setPosition(i+1);
+		for(int i=0; i<usersList.size(); i++){
+			usersList.get(0).getUserStatsEntity().setPosition(i+1);
 		}
 				
 	}
+	
+	private UserProfileTO createUserProfile(int i){
+		UserProfileTO userProfileTO = new UserProfileTO();
+		userProfileTO.setLogin("login" + i);
+		userProfileTO.setPassword("password" + i);
+		userProfileTO.setName("name" + i);
+		userProfileTO.setSurname("surname" + i);
+		userProfileTO.setEmail("email" + i + "@email.pl");
+		userProfileTO.setAboutMe("aboutMe" + i);
+		userProfileTO.setLifeMotto("lifeMotto" + i);
+		
+		userProfileTO.setUserStatsTO(createUserStats(i));
+		
+		return userProfileTO;
+	}
+	
+	private UserStatsTO createUserStats(int i){
+		UserStatsTO userStatsTO = new UserStatsTO();
+		userStatsTO.setLevel(0);
+		userStatsTO.setPosition(i);
+		userStatsTO.setPoints(i*10-20);
+		userStatsTO.setGamesPlayed(i+3);
+		userStatsTO.setGamesWon(i);
+		userStatsTO.setGamesDrawn(1);
+		userStatsTO.setGamesLost(2);
+		
+		return userStatsTO;
+	}
+
+	@Override
+	public void initData() {
+		UserProfileTO user1 = createUserProfile(1);
+		UserProfileTO user2 = createUserProfile(2);
+		UserProfileTO user3 = createUserProfile(3);
+		//UserProfileTO user4 = createUserProfile(4);
+		//UserProfileTO user5 = createUserProfile(5);
+		try {
+			user1 = save(user1);
+			user2 = save(user2);
+			user3 = save(user3);
+			//user4 = save(user4);
+			//user5 = save(user5);
+		} catch (UserProfileExistsInDatabaseException e) {
+			e.printStackTrace();
+		}		
+		
+	}
+
+	@Override
+	public List<UserProfileTO> getAll() {
+		List<UserProfileEntity> usersList = new ArrayList<UserProfileEntity>();
+		for(UserProfileEntity user: users.values()){
+			usersList.add(user);
+		}
+		return UserProfileMapper.map2TOs(usersList);
+	}
+	
+	
 	
 }

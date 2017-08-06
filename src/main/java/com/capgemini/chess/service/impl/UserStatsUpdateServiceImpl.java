@@ -35,12 +35,15 @@ public class UserStatsUpdateServiceImpl implements UserStatsUpdateService {
 		case HOST_WON:
 			hostStats = userStatsCalculationService.addWin(hostStats);
 			guestStats = userStatsCalculationService.addLoss(guestStats);
+			break;
 		case GUEST_WON:
 			hostStats = userStatsCalculationService.addLoss(hostStats);
 			guestStats = userStatsCalculationService.addWin(guestStats);
+			break;
 		case DRAW:
 			hostStats = userStatsCalculationService.addDraw(hostStats);
 			guestStats = userStatsCalculationService.addDraw(guestStats);
+			break;
 		}
 		
 		userDao.updateUserStats(matchto.getHostPlayerId(), hostStats);

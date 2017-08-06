@@ -1,5 +1,6 @@
 package com.capgemini.chess.dataaccess;
 
+import java.util.List;
 import com.capgemini.chess.exception.UserProfileExistsInDatabaseException;
 import com.capgemini.chess.service.to.UserProfileTO;
 import com.capgemini.chess.service.to.UserStatsTO;
@@ -16,5 +17,7 @@ public interface UserDao {
 	void updateUserProfile(UserUpdateTO userUpdateTO);
 	void updateUserStats(Long userProfileId, UserStatsTO newStats);
 	void updatePositions();
+	void initData() throws UserProfileExistsInDatabaseException;
 	
+	List<UserProfileTO> getAll();
 }

@@ -39,7 +39,8 @@ public class MatchRegistrationServiceImpl implements MatchRegistrationService {
 		MatchTO matchTO = matchDao.save(newMatch);
 		matchValidationService.validateMatch(matchTO.getId());
 		
-		userStatsUpdateService.updateStats(newMatch);
+		//userStatsUpdateService.updateStats(newMatch);
+		userStatsUpdateService.updateStats(matchTO);
 	}
 
 }
