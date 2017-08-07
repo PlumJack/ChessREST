@@ -26,7 +26,6 @@ public class ChessRestController {
 	
 	 @RequestMapping(value = "/stats", method = RequestMethod.GET, produces = "application/json")
 	public UserStatsTO getStats(@RequestParam("login") String login) throws UserProfileValidationException{
-		 //return createUserStats(userId);
 		 return userServiceFacade.getStats(login);
 	}
 	
